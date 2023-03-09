@@ -7,6 +7,7 @@ namespace SuperFastFood_OOA_och_OOD
 {
     public partial class Form1 : Form
     {
+
         TextBox[] textBoxesCustomer;
 
         MySqlConnection conn;
@@ -23,7 +24,7 @@ namespace SuperFastFood_OOA_och_OOD
 
             conn = new MySqlConnection(connString);
 
-
+            //Skapar array referens för de boxar där kund kan lämna input 
             textBoxesCustomer = new TextBox[] { txtBoxAdress, txtBoxName };
 
         }
@@ -32,6 +33,7 @@ namespace SuperFastFood_OOA_och_OOD
 
         private void ShowRestaurants()
         {
+            //Skapar en aqlquerry
             string Sqlquerry;
 
             Sqlquerry = $"CALL ShowRestaurants";
@@ -72,6 +74,7 @@ namespace SuperFastFood_OOA_och_OOD
                     Restaurants.rest.Add(new Restaurants(Restauranger));
                 }
 
+                //Stänger kopplingen till DB
                 conn.Close();
 
             }
@@ -84,6 +87,7 @@ namespace SuperFastFood_OOA_och_OOD
 
         private void GridViewBomabayFoodMenu()
         {
+            //Skapar Sqlquerry
             string Sqlquerry;
 
             Sqlquerry = $"CALL BombayFoodMenu";
@@ -125,6 +129,7 @@ namespace SuperFastFood_OOA_och_OOD
                     Maträtter.GetMaträtter.Add(new Maträtter(Dish, Price));
                 }
 
+                //Stänger kopplingen till DB
                 conn.Close();
 
             }
@@ -137,14 +142,17 @@ namespace SuperFastFood_OOA_och_OOD
         private void btnShowRestaurangs_MouseClick(object sender, MouseEventArgs e)
         {
            ShowRestaurants();
+           //Gör knapparna för att välja mellan de olika restaurangerna synliga
            btnBombayFood.Visible = true;
            btnLaoSiam.Visible = true;
            btnBurgers.Visible = true;
+           //Gör datagriden synlig med de olika alternativen av restauranger
            GridViewRestaurants.Visible = true;
         }
 
         private void btnBombayFood_MouseClick(object sender, MouseEventArgs e)
         {
+            
             panelBombay.BringToFront();
         }
 
@@ -152,7 +160,10 @@ namespace SuperFastFood_OOA_och_OOD
         private void btnMenuBombayFood_MouseClick(object sender, MouseEventArgs e)
         {
             GridViewBomabayFoodMenu();
+            //Gör menyn synlig för den valda restautrangen
             GridViewBombayFood.Visible = true;
+
+            //Gör knapparna för att välja mellan de olika maträtterna synliga 
             btnTikkaMasala.Visible = true;
             btnBeefKorma.Visible = true;
         }
@@ -160,6 +171,7 @@ namespace SuperFastFood_OOA_och_OOD
 
         private void GridViewLaoSiamMenu()
         {
+            //Skapar Sqlquerry
             string Sqlquerry;
 
             Sqlquerry = $"CALL LaoSiamMenu";
@@ -201,6 +213,7 @@ namespace SuperFastFood_OOA_och_OOD
                     Maträtter.GetMaträtter.Add(new Maträtter(Dish, Price));
                 }
 
+                //Stänger koppling till DB
                 conn.Close();
 
             }
@@ -230,7 +243,11 @@ namespace SuperFastFood_OOA_och_OOD
         private void btnLaoSiamMenu_MouseClick(object sender, MouseEventArgs e)
         {
             GridViewLaoSiamMenu();
+
+            //Gör menyn synlig för den valda restautrangen
             GridViewLaoMenu.Visible = true;
+
+            //Gör knapparna för att välja mellan de olika maträtterna synliga
             btnPadThai.Visible = true;
             btnPadSateh.Visible = true;
             btnKhaoPad.Visible = true;
@@ -238,6 +255,7 @@ namespace SuperFastFood_OOA_och_OOD
 
         private void GridViewHomeOfBurgersMenu()
         {
+            //Skapar Sqlquerry
             string Sqlquerry;
 
             Sqlquerry = $"CALL HomeOfBurgersMenu";
@@ -279,6 +297,7 @@ namespace SuperFastFood_OOA_och_OOD
                     Maträtter.GetMaträtter.Add(new Maträtter(Dish, Price));
                 }
 
+                //Stänger koppling till DB
                 conn.Close();
 
             }
@@ -291,7 +310,11 @@ namespace SuperFastFood_OOA_och_OOD
         private void btnBurgersMenu_MouseClick(object sender, MouseEventArgs e)
         {
             GridViewHomeOfBurgersMenu();
+
+            //Gör menyn synlig för den valda restautrangen
             GridViewBurgers.Visible = true;
+
+            //Gör knapparna för att välja mellan de olika maträtterna synliga
             btnCheeseburger.Visible = true;
             btnTruffle.Visible = true;
             btnBacon.Visible = true;
@@ -311,6 +334,7 @@ namespace SuperFastFood_OOA_och_OOD
         {
             panelCheckOut.BringToFront();
 
+            //Ändrar texten på checkout sidan utifrån kundens val
             LabelSelectedDish.Text = "Classic Cheeseburger";
             LabelSelectedDishPrice.Text = "115 Kr";
             
@@ -337,6 +361,7 @@ namespace SuperFastFood_OOA_och_OOD
                 {
                     
                     txtBox.BackColor = TextBox.DefaultBackColor;
+                    //Om kraven är uppfylda går beställningen igenom med validering till kund
                     MessageBox.Show($"{txtBoxName.Text} Your Order is confirmed");
                     
                 }
@@ -349,6 +374,7 @@ namespace SuperFastFood_OOA_och_OOD
 
             if (!valid)
             {
+                //Ger felmeddelande ifall textrutor ej är ifyllda
                 MessageBox.Show("Faulty input. Verify the red boxes.");
                 return;
             }
@@ -359,6 +385,7 @@ namespace SuperFastFood_OOA_och_OOD
         {
             panelCheckOut.BringToFront();
 
+            //Ändrar texten på checkout sidan utifrån kundens val
             LabelSelectedDish.Text = "Truffle Burger";
             LabelSelectedDishPrice.Text = "130 Kr";
         }
@@ -367,6 +394,7 @@ namespace SuperFastFood_OOA_och_OOD
         {
             panelCheckOut.BringToFront();
 
+            //Ändrar texten på checkout sidan utifrån kundens val
             LabelSelectedDish.Text = "Cheese 'n' Bacon";
             LabelSelectedDishPrice.Text = "120 Kr";
         }
@@ -375,6 +403,7 @@ namespace SuperFastFood_OOA_och_OOD
         {
             panelCheckOut.BringToFront();
 
+            //Ändrar texten på checkout sidan utifrån kundens val
             LabelSelectedDish.Text = "Pad Thai";
             LabelSelectedDishPrice.Text = "100 Kr";
         }
@@ -383,6 +412,7 @@ namespace SuperFastFood_OOA_och_OOD
         {
             panelCheckOut.BringToFront();
 
+            //Ändrar texten på checkout sidan utifrån kundens val
             LabelSelectedDish.Text = "Khao Pad";
             LabelSelectedDishPrice.Text = "110 Kr";
         }
@@ -391,6 +421,7 @@ namespace SuperFastFood_OOA_och_OOD
         {
             panelCheckOut.BringToFront();
 
+            //Ändrar texten på checkout sidan utifrån kundens val
             LabelSelectedDish.Text = "Pad Sateh";
             LabelSelectedDishPrice.Text = "115 Kr";
         }
@@ -399,6 +430,7 @@ namespace SuperFastFood_OOA_och_OOD
         {
             panelCheckOut.BringToFront();
 
+            //Ändrar texten på checkout sidan utifrån kundens val
             LabelSelectedDish.Text = "Chicken Tikka Masala";
             LabelSelectedDishPrice.Text = "130 Kr";
         }
@@ -407,6 +439,7 @@ namespace SuperFastFood_OOA_och_OOD
         {
             panelCheckOut.BringToFront();
 
+            //Ändrar texten på checkout sidan utifrån kundens val
             LabelSelectedDish.Text = "Beef Korma";
             LabelSelectedDishPrice.Text = "125 Kr";
         }
