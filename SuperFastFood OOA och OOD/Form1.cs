@@ -7,6 +7,8 @@ namespace SuperFastFood_OOA_och_OOD
 {
     public partial class Form1 : Form
     {
+        TextBox[] textBoxesCustomer;
+
         MySqlConnection conn;
         public Form1()
         {
@@ -21,6 +23,8 @@ namespace SuperFastFood_OOA_och_OOD
 
             conn = new MySqlConnection(connString);
 
+
+            textBoxesCustomer = new TextBox[] { txtBoxAdress, txtBoxName };
 
         }
 
@@ -64,7 +68,7 @@ namespace SuperFastFood_OOA_och_OOD
                     
 
 
-                    //Skapar film  objekt och sparar i statisk lista
+                    //Skapar maträtt objekt och sparar i statisk lista
                     Restaurants.rest.Add(new Restaurants(Restauranger));
                 }
 
@@ -117,7 +121,7 @@ namespace SuperFastFood_OOA_och_OOD
                     string Price = reader["Price"].ToString();
 
 
-                    //Skapar film  objekt och sparar i statisk lista
+                    //Skapar maträtt objekt och sparar i statisk lista
                     Maträtter.GetMaträtter.Add(new Maträtter(Dish, Price));
                 }
 
@@ -136,7 +140,7 @@ namespace SuperFastFood_OOA_och_OOD
            btnBombayFood.Visible = true;
            btnLaoSiam.Visible = true;
            btnBurgers.Visible = true;
-            GridViewRestaurants.Visible = true;
+           GridViewRestaurants.Visible = true;
         }
 
         private void btnBombayFood_MouseClick(object sender, MouseEventArgs e)
@@ -149,6 +153,8 @@ namespace SuperFastFood_OOA_och_OOD
         {
             GridViewBomabayFoodMenu();
             GridViewBombayFood.Visible = true;
+            btnTikkaMasala.Visible = true;
+            btnBeefKorma.Visible = true;
         }
 
 
@@ -191,7 +197,7 @@ namespace SuperFastFood_OOA_och_OOD
                     string Price = reader["Price"].ToString();
 
 
-                    //Skapar film  objekt och sparar i statisk lista
+                    //Skapar maträtt objekt och sparar i statisk lista
                     Maträtter.GetMaträtter.Add(new Maträtter(Dish, Price));
                 }
 
@@ -213,6 +219,7 @@ namespace SuperFastFood_OOA_och_OOD
         {
             panelLaoSiam.BringToFront();
 
+
         }
 
         private void btnBackToStart_MouseClick(object sender, MouseEventArgs e)
@@ -224,6 +231,9 @@ namespace SuperFastFood_OOA_och_OOD
         {
             GridViewLaoSiamMenu();
             GridViewLaoMenu.Visible = true;
+            btnPadThai.Visible = true;
+            btnPadSateh.Visible = true;
+            btnKhaoPad.Visible = true;
         }
 
         private void GridViewHomeOfBurgersMenu()
@@ -265,7 +275,7 @@ namespace SuperFastFood_OOA_och_OOD
                     string Price = reader["Price"].ToString();
 
 
-                    //Skapar film  objekt och sparar i statisk lista
+                    //Skapar maträtt objekt och sparar i statisk lista
                     Maträtter.GetMaträtter.Add(new Maträtter(Dish, Price));
                 }
 
@@ -281,7 +291,10 @@ namespace SuperFastFood_OOA_och_OOD
         private void btnBurgersMenu_MouseClick(object sender, MouseEventArgs e)
         {
             GridViewHomeOfBurgersMenu();
-            GridViewBurgers.Visible= true;
+            GridViewBurgers.Visible = true;
+            btnCheeseburger.Visible = true;
+            btnTruffle.Visible = true;
+            btnBacon.Visible = true;
         }
 
         private void btnBackToStart3_MouseClick(object sender, MouseEventArgs e)
@@ -294,8 +307,114 @@ namespace SuperFastFood_OOA_och_OOD
             panelBurgers.BringToFront();
         }
 
-       
+        private void btnCheeseburger_MouseClick(object sender, MouseEventArgs e)
+        {
+            panelCheckOut.BringToFront();
 
+            LabelSelectedDish.Text = "Classic Cheeseburger";
+            LabelSelectedDishPrice.Text = "115 Kr";
+            
+        }
+        
+
+        private void btnOrder_Click(object sender, EventArgs e)
+        {
+            //Validering
+            bool valid = true;
+
+            foreach (TextBox txtBox in textBoxesCustomer)
+            {
+                txtBox.Text = txtBox.Text.Trim();
+
+                //Kontrollera att txtBox har text
+                if (txtBox.Text == "")
+                {
+                    //Validering har misslyckats
+                    valid = false;
+                    txtBox.BackColor = Color.Red;
+                }
+                else
+                {
+                    
+                    txtBox.BackColor = TextBox.DefaultBackColor;
+                    MessageBox.Show($"{txtBoxName.Text} Your Order is confirmed");
+                    
+                }
+
+               
+
+            }
+
+            //Kontrollera valid
+
+            if (!valid)
+            {
+                MessageBox.Show("Faulty input. Verify the red boxes.");
+                return;
+            }
+
+        }
+
+        private void btnTruffle_MouseClick(object sender, MouseEventArgs e)
+        {
+            panelCheckOut.BringToFront();
+
+            LabelSelectedDish.Text = "Truffle Burger";
+            LabelSelectedDishPrice.Text = "130 Kr";
+        }
+
+        private void btnBacon_MouseClick(object sender, MouseEventArgs e)
+        {
+            panelCheckOut.BringToFront();
+
+            LabelSelectedDish.Text = "Cheese 'n' Bacon";
+            LabelSelectedDishPrice.Text = "120 Kr";
+        }
+
+        private void btnPadThai_MouseClick(object sender, MouseEventArgs e)
+        {
+            panelCheckOut.BringToFront();
+
+            LabelSelectedDish.Text = "Pad Thai";
+            LabelSelectedDishPrice.Text = "100 Kr";
+        }
+
+        private void btnKhaoPad_MouseClick(object sender, MouseEventArgs e)
+        {
+            panelCheckOut.BringToFront();
+
+            LabelSelectedDish.Text = "Khao Pad";
+            LabelSelectedDishPrice.Text = "110 Kr";
+        }
+
+        private void btnPadSateh_MouseClick(object sender, MouseEventArgs e)
+        {
+            panelCheckOut.BringToFront();
+
+            LabelSelectedDish.Text = "Pad Sateh";
+            LabelSelectedDishPrice.Text = "115 Kr";
+        }
+
+        private void btnTikkaMasala_MouseClick(object sender, MouseEventArgs e)
+        {
+            panelCheckOut.BringToFront();
+
+            LabelSelectedDish.Text = "Chicken Tikka Masala";
+            LabelSelectedDishPrice.Text = "130 Kr";
+        }
+
+        private void btnBeefKorma_MouseClick(object sender, MouseEventArgs e)
+        {
+            panelCheckOut.BringToFront();
+
+            LabelSelectedDish.Text = "Beef Korma";
+            LabelSelectedDishPrice.Text = "125 Kr";
+        }
+
+        private void btnBackToStartCheckOut_MouseClick(object sender, MouseEventArgs e)
+        {
+            panelStartsida.BringToFront();
+        }
     }
 
    
