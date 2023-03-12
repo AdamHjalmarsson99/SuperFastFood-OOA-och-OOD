@@ -321,7 +321,7 @@
             this.btnBackToStartCheckOut.Name = "btnBackToStartCheckOut";
             this.btnBackToStartCheckOut.Size = new System.Drawing.Size(111, 31);
             this.btnBackToStartCheckOut.TabIndex = 13;
-            this.btnBackToStartCheckOut.Text = "Back To Start";
+            this.btnBackToStartCheckOut.Text = "Change Order";
             this.btnBackToStartCheckOut.UseVisualStyleBackColor = true;
             this.btnBackToStartCheckOut.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnBackToStartCheckOut_MouseClick);
             // 
@@ -342,6 +342,7 @@
             this.txtBoxAdress.Name = "txtBoxAdress";
             this.txtBoxAdress.Size = new System.Drawing.Size(125, 27);
             this.txtBoxAdress.TabIndex = 11;
+            this.txtBoxAdress.TextChanged += new System.EventHandler(this.txtBoxAdress_TextChanged);
             // 
             // txtBoxName
             // 
@@ -349,6 +350,7 @@
             this.txtBoxName.Name = "txtBoxName";
             this.txtBoxName.Size = new System.Drawing.Size(125, 27);
             this.txtBoxName.TabIndex = 11;
+            this.txtBoxName.TextChanged += new System.EventHandler(this.txtBoxName_TextChanged);
             // 
             // label13
             // 

@@ -448,6 +448,18 @@ namespace SuperFastFood_OOA_och_OOD
         {
             panelStartsida.BringToFront();
         }
+
+        private void txtBoxAdress_TextChanged(object sender, EventArgs e)
+        {
+            //Ändrar tillbaka färgen till orginal efter felaktig input har skett
+            txtBoxAdress.BackColor = TextBox.DefaultBackColor;
+        }
+
+        private void txtBoxName_TextChanged(object sender, EventArgs e)
+        {
+            //Ändrar tillbaka färgen till orginal efter felaktig input har skett
+            txtBoxName.BackColor = TextBox.DefaultBackColor;
+        }
     }
 
    
